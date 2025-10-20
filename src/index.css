@@ -1,0 +1,210 @@
+@import url('https://api.fontshare.com/v2/css?f[]=satoshi@700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Premium E-Saas Landing Page Design System */
+
+@layer base {
+  :root {
+    /* Main Colors - Premium Dark Theme */
+    --background: 60 4% 11%; /* #1C1C1A */
+    --foreground: 0 0% 100%; /* #FFFFFF */
+
+    --card: 60 4% 14%;
+    --card-foreground: 0 0% 100%;
+
+    --popover: 60 4% 14%;
+    --popover-foreground: 0 0% 100%;
+
+    /* Purple Accent */
+    --primary: 270 34% 44%; /* #6F4A95 */
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 60 4% 18%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 60 4% 20%;
+    --muted-foreground: 30 22% 84%; /* #DAD5D0 - beige */
+
+    /* Accent variations */
+    --accent: 270 34% 44%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+
+    /* Borders and dividers - beige */
+    --border: 30 22% 84%;
+    --input: 30 10% 25%;
+    --ring: 270 34% 44%;
+
+    --radius: 0.75rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-normal antialiased;
+    font-family: system-ui, -apple-system, sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Satoshi', system-ui, sans-serif;
+    font-weight: 700;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-gradient-to-r from-primary to-purple-400 bg-clip-text text-transparent;
+  }
+  
+  .animate-fade-in-up {
+    animation: fadeInUp 0.6s ease-out;
+  }
+  
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Background Effects Animations */
+  .animate-spin-slow {
+    animation: spin 60s linear infinite;
+  }
+
+  .animate-float {
+    animation: float 8s ease-in-out infinite;
+  }
+
+  .animate-float-delayed {
+    animation: float 8s ease-in-out infinite;
+  }
+
+  .animate-particle-1 {
+    animation: particleFloat1 25s ease-in-out infinite;
+  }
+
+  .animate-particle-2 {
+    animation: particleFloat2 30s ease-in-out infinite;
+  }
+
+  .animate-particle-3 {
+    animation: particleFloat3 35s ease-in-out infinite;
+  }
+
+  .animate-scan-lines {
+    animation: scanLines 8s linear infinite;
+  }
+
+  .animate-shimmer {
+    animation: shimmer 15s ease-in-out infinite;
+  }
+
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px) translateX(0px);
+    }
+    25% {
+      transform: translateY(-20px) translateX(10px);
+    }
+    50% {
+      transform: translateY(0px) translateX(20px);
+    }
+    75% {
+      transform: translateY(20px) translateX(10px);
+    }
+  }
+
+  @keyframes particleFloat1 {
+    0%, 100% {
+      transform: translate3d(0, 0, 0);
+      opacity: 0;
+    }
+    10%, 90% {
+      opacity: 1;
+    }
+    50% {
+      transform: translate3d(30px, -100px, 0);
+    }
+  }
+
+  @keyframes particleFloat2 {
+    0%, 100% {
+      transform: translate3d(0, 0, 0);
+      opacity: 0;
+    }
+    10%, 90% {
+      opacity: 1;
+    }
+    50% {
+      transform: translate3d(-40px, -120px, 0);
+    }
+  }
+
+  @keyframes particleFloat3 {
+    0%, 100% {
+      transform: translate3d(0, 0, 0);
+      opacity: 0;
+    }
+    10%, 90% {
+      opacity: 1;
+    }
+    50% {
+      transform: translate3d(20px, -80px, 0);
+    }
+  }
+
+  @keyframes scanLines {
+    0% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(20px);
+    }
+  }
+
+  @keyframes shimmer {
+    0% {
+      transform: translateX(-100%);
+    }
+    50%, 100% {
+      transform: translateX(100%);
+    }
+  }
+
+  /* Reduced Motion Support */
+  @media (prefers-reduced-motion: reduce) {
+    .animate-spin-slow,
+    .animate-float,
+    .animate-float-delayed,
+    .animate-particle-1,
+    .animate-particle-2,
+    .animate-particle-3,
+    .animate-scan-lines,
+    .animate-shimmer {
+      animation: none;
+    }
+  }
+}
