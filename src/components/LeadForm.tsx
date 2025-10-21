@@ -86,21 +86,45 @@ const LeadForm = () => {
   };
 
   const handleSubmit = async () => {
-    if (!validateStep()) return;
+  if (!validateStep()) return;
 
-    setLoading(true);
-    
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    
-    setLoading(false);
-    setSubmitted(true);
-    
+  setLoading(true);
+
+  try {
+    const response = await fetch(
+      "https://autowebhook.aasyncferramentas.space/webhook/86ec70a1-00aa-459a-975a-1ca40fe5a562",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      }
+    );
+
+    if (response.ok) {
+      setSubmitted(true);
+      toast({
+        title: "Formulário enviado com sucesso!",
+        description: "Entraremos em contato em breve para agendar sua apresentação.",
+      });
+    } else {
+      toast({
+        title: "Erro ao enviar formulário",
+        description: "Tente novamente em alguns instantes.",
+        variant: "destructive",
+      });
+    }
+  } catch (error) {
+    console.error("Erro ao enviar:", error);
     toast({
-      title: "Formulário enviado com sucesso!",
-      description: "Entraremos em contato em breve para agendar sua apresentação.",
+      title: "Erro de conexão",
+      description: "Verifique sua internet e tente novamente.",
+      variant: "destructive",
     });
-  };
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   const progress = (step / 3) * 100;
 
