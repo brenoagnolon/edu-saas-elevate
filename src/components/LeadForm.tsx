@@ -91,14 +91,24 @@ const LeadForm = () => {
   setLoading(true);
 
   try {
-    const response = await fetch(
-      "https://autowebhook.aasyncferramentas.space/webhook/86ec70a1-00aa-459a-975a-1ca40fe5a562",
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      }
-    );
+   import { sendWebhook } from "@/api/sendWebhook";
+...
+const success = await sendWebhook(formData);
+
+if (success) {
+  setSubmitted(true);
+  toast({
+    title: "Formulário enviado com sucesso!",
+    description: "Entraremos em contato em breve para agendar sua apresentação.",
+  });
+} else {
+  toast({
+    title: "Erro ao enviar formulário",
+    description: "Tente novamente em alguns instantes.",
+    variant: "destructive",
+  });
+}
+
 
     if (response.ok) {
       setSubmitted(true);
