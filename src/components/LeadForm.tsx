@@ -121,30 +121,6 @@ const LeadForm = () => {
 
 
 
-    if (response.ok) {
-      setSubmitted(true);
-      toast({
-        title: "Formulário enviado com sucesso!",
-        description: "Entraremos em contato em breve para agendar sua apresentação.",
-      });
-    } else {
-      toast({
-        title: "Erro ao enviar formulário",
-        description: "Tente novamente em alguns instantes.",
-        variant: "destructive",
-      });
-    }
-  } catch (error) {
-    console.error("Erro ao enviar:", error);
-    toast({
-      title: "Erro de conexão",
-      description: "Verifique sua internet e tente novamente.",
-      variant: "destructive",
-    });
-  } finally {
-    setLoading(false);
-  }
-};
 
 
   const progress = (step / 3) * 100;
