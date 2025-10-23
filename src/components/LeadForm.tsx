@@ -92,23 +92,33 @@ const LeadForm = () => {
   setLoading(true);
 
   try {
-   import { sendWebhook } from "@/api/sendWebhook";
-...
-const success = await sendWebhook(formData);
+    const success = await sendWebhook(formData);
 
-if (success) {
-  setSubmitted(true);
-  toast({
-    title: "Formulário enviado com sucesso!",
-    description: "Entraremos em contato em breve para agendar sua apresentação.",
-  });
-} else {
-  toast({
-    title: "Erro ao enviar formulário",
-    description: "Tente novamente em alguns instantes.",
-    variant: "destructive",
-  });
-}
+    if (success) {
+      setSubmitted(true);
+      toast({
+        title: "Formulário enviado com sucesso!",
+        description: "Entraremos em contato em breve para agendar sua apresentação.",
+      });
+    } else {
+      toast({
+        title: "Erro ao enviar formulário",
+        description: "Tente novamente em alguns instantes.",
+        variant: "destructive",
+      });
+    }
+  } catch (error) {
+    console.error("Erro ao enviar:", error);
+    toast({
+      title: "Erro de conexão",
+      description: "Verifique sua internet e tente novamente.",
+      variant: "destructive",
+    });
+  } finally {
+    setLoading(false);
+  }
+};
+
 
 
     if (response.ok) {
