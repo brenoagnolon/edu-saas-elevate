@@ -33,7 +33,7 @@ const Hero = () => {
         </h1>
         
         <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-          E-Saas personalizado: da extração da sua metodologia até uma plataforma tecnológica completa com IA integrada
+          Construa valuation real a partir do mesmo conhecimento que você já vende — com receita previsível, escalabilidade infinita e sem depender da sua energia.
         </p>
 
         <div className="pt-8">
