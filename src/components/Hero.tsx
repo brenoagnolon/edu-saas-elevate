@@ -28,7 +28,7 @@ const Hero = () => {
         </div>
 
         <h1 className="text-5xl md:text-7xl font-bold leading-tight tracking-tight">
-          Transforme seu conhecimento em um{" "}
+          Transforme seu cursou ou mentoria em um{" "}
           <span className="text-gradient">Software Educacional</span>
         </h1>
         
