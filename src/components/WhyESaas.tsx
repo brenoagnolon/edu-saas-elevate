@@ -18,10 +18,10 @@ const cards = [
     title: "Operacional",
     benefits: [
       "Escalabilidade infinita",
-      "Automação completa",
+      "Entrega sem depender do especialista",
       "Dados em tempo real",
       "Atualizações centralizadas",
-      "Suporte escalável com IA"
+      "Suporte incontestável com IA"
     ]
   },
   {
@@ -29,10 +29,10 @@ const cards = [
     title: "Experiência do Aluno",
     benefits: [
       "Acesso contínuo ao conteúdo",
-      "Sempre atualizado",
+      "Ferramentas práticas",
       "IA personalizada",
       "Gamificação integrada",
-      "Comunidade ativa"
+      "Acesso simplificado"
     ]
   },
   {
@@ -42,7 +42,7 @@ const cards = [
       "Autoridade premium no mercado",
       "Diferenciação competitiva",
       "Independência de plataformas",
-      "Brand fortalecido",
+      "Branding fortalecido",
       "Barreira de entrada alta"
     ]
   },
@@ -50,7 +50,7 @@ const cards = [
     icon: Target,
     title: "Estratégico",
     benefits: [
-      "Redução de refund/churn",
+      "Redução de churn",
       "Retenção maior de alunos",
       "Upsell facilitado",
       "Dados 100% proprietários",
