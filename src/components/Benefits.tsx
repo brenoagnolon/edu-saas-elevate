@@ -4,23 +4,23 @@ import { FileText, Brain, Settings, Star } from "lucide-react";
 const benefits = [
   {
     icon: FileText,
-    title: "Metodologia Estruturada",
-    description: "Extraímos e organizamos todo seu conhecimento em uma estrutura pedagógica completa"
+    title: "Estruturação da Metodologia",
+    description: "Extraímos e organizamos todo seu conhecimento em uma estrutura pedagógica e linha de raciocínio"
   },
   {
     icon: Brain,
-    title: "IA Personalizada",
-    description: "Assistente inteligente treinado com sua metodologia para suporte aos alunos 24/7"
+    title: "IA Especialista Integrada",
+    description: "Com base na sua metodologia, treinamos sua IA para dúvidas e suporte aos alunos 24/7 e outras funçoes"
   },
   {
     icon: Settings,
     title: "Ferramentas Interativas",
-    description: "Recursos tecnológicos que potencializam o aprendizado e engajamento"
+    description: "Desenvovemos recursos tecnológicos que potencializam o aprendizado, engajamento e prática dos alunos"
   },
   {
     icon: Star,
-    title: "Experiência Premium",
-    description: "Plataforma completa com design moderno e experiência de uso excepcional"
+    title: "App completo e independente",
+    description: "Traduzimos sua metodologia, ferramentas e IA em um app com design moderno e experiência de uso excepcional pronto para ser ofertado"
   }
 ];
 
@@ -30,10 +30,10 @@ const Benefits = () => {
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16 space-y-4">
           <h2 className="text-4xl md:text-5xl font-bold">
-            Benefícios do E-Saas
+            Passo a Passo da construção do seu E-Saas
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Transforme sua expertise em uma solução tecnológica completa
+            Da extração da sua metodologia ao aplicativo exclusivo e rentável
           </p>
         </div>
 
