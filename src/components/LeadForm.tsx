@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -8,6 +8,7 @@ import { Progress } from "@/components/ui/progress";
 import { ChevronLeft, ChevronRight, Check } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { sendWebhook } from "@/api/sendWebhook";
+import { injectMetaPixel, waitForFbq } from "@/utils/pixels.util";
 
 const LeadForm = () => {
   const [step, setStep] = useState(1);
@@ -24,7 +25,7 @@ const LeadForm = () => {
     company: "",
     revenue: "",
     students: "",
-    investment: ""
+    investment: "",
   });
 
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -86,44 +87,78 @@ const LeadForm = () => {
     setErrors({});
   };
 
+  const _loadPixel = async () => {
+    injectMetaPixel();
+    await waitForFbq();
+  };
+
+  const _dispatchPixels = () => {
+    const pixelsIds = ["235888179496707"];
+
+    pixelsIds.forEach((id) => {
+      if (window.fbq) {
+        if (!window[`fbq_inited_${id}`]) {
+          window.fbq("init", id);
+          window[`fbq_inited_${id}`] = true;
+        }
+
+        window.fbq(
+          "track",
+          "Lead E-SaaS" /* , {
+          value: 1,
+          currency: "BRL",
+        } */
+        );
+      }
+    });
+  };
+
   const handleSubmit = async () => {
-  if (!validateStep()) return;
+    if (!validateStep()) return;
 
-  setLoading(true);
+    setLoading(true);
 
-  try {
-    const success = await sendWebhook(formData);
+    try {
+      const success = await sendWebhook(formData);
 
-    if (success) {
-      setSubmitted(true);
+      if (success) {
+        setSubmitted(true);
+        toast({
+          title: "Formulário enviado com sucesso!",
+          description: "Entraremos em contato em breve para agendar sua apresentação.",
+        });
+
+        _dispatchPixels();
+        window.open("https://wa.me/5511958405698?text=Ol%C3%A1,%20gostaria%20de%20falar%20sobre%20o%20E-SaaS", "_blank");
+      } else {
+        toast({
+          title: "Erro ao enviar formulário",
+          description: "Tente novamente em alguns instantes.",
+          variant: "destructive",
+        });
+      }
+    } catch (error) {
+      console.error("Erro ao enviar:", error);
       toast({
-        title: "Formulário enviado com sucesso!",
-        description: "Entraremos em contato em breve para agendar sua apresentação.",
-      });
-    } else {
-      toast({
-        title: "Erro ao enviar formulário",
-        description: "Tente novamente em alguns instantes.",
+        title: "Erro de conexão",
+        description: "Verifique sua internet e tente novamente.",
         variant: "destructive",
       });
+    } finally {
+      setLoading(false);
     }
-  } catch (error) {
-    console.error("Erro ao enviar:", error);
-    toast({
-      title: "Erro de conexão",
-      description: "Verifique sua internet e tente novamente.",
-      variant: "destructive",
-    });
-  } finally {
-    setLoading(false);
-  }
-};
+  };
 
-
-
-
+  useEffect(() => {
+    _loadPixel();
+  }, []);
 
   const progress = (step / 3) * 100;
+
+  const _test = () => {
+    _dispatchPixels();
+    window.open("https://wa.me/5511958405698?text=Ol%C3%A1,%20gostaria%20de%20falar%20sobre%20o%20E-SaaS", "_blank");
+  };
 
   if (submitted) {
     return (
@@ -134,9 +169,7 @@ const LeadForm = () => {
               <Check className="w-10 h-10 text-primary" />
             </div>
             <h2 className="text-3xl font-bold mb-4">Obrigado pelo interesse!</h2>
-            <p className="text-muted-foreground text-lg">
-              Recebemos suas informações e entraremos em contato em breve para agendar uma apresentação personalizada do E-Saas.
-            </p>
+            <p className="text-muted-foreground text-lg">Recebemos suas informações e entraremos em contato em breve para agendar uma apresentação personalizada do E-Saas.</p>
           </Card>
         </div>
       </section>
@@ -148,9 +181,7 @@ const LeadForm = () => {
       <div className="max-w-2xl mx-auto">
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold mb-4">Agende sua Apresentação</h2>
-          <p className="text-muted-foreground text-lg">
-            Preencha os dados para conhecer o E-Saas personalizado
-          </p>
+          <p className="text-muted-foreground text-lg">Preencha os dados para conhecer o E-Saas personalizado</p>
         </div>
 
         <Card className="p-8 md:p-10 bg-card border-border/50 shadow-2xl">
@@ -167,47 +198,24 @@ const LeadForm = () => {
           {step === 1 && (
             <div className="space-y-6 animate-fade-in-up">
               <h3 className="text-2xl font-bold mb-6">Seus Contatos</h3>
-              
+
               <div className="space-y-2">
                 <Label htmlFor="email">E-mail *</Label>
-                <Input
-                  id="email"
-                  type="email"
-                  placeholder="seu@email.com"
-                  value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className={errors.email ? "border-destructive" : ""}
-                />
+                <Input id="email" type="email" placeholder="seu@email.com" value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} className={errors.email ? "border-destructive" : ""} />
                 {errors.email && <p className="text-sm text-destructive">{errors.email}</p>}
               </div>
 
               <div className="space-y-2">
                 <Label htmlFor="whatsapp">WhatsApp</Label>
-                <Input
-                  id="whatsapp"
-                  type="tel"
-                  placeholder="(00) 00000-0000"
-                  value={formData.whatsapp}
-                  onChange={(e) => setFormData({ ...formData, whatsapp: formatWhatsApp(e.target.value) })}
-                  maxLength={15}
-                />
+                <Input id="whatsapp" type="tel" placeholder="(00) 00000-0000" value={formData.whatsapp} onChange={(e) => setFormData({ ...formData, whatsapp: formatWhatsApp(e.target.value) })} maxLength={15} />
               </div>
 
               <div className="space-y-2">
                 <Label htmlFor="instagram">Instagram</Label>
-                <Input
-                  id="instagram"
-                  placeholder="@seuinstagram"
-                  value={formData.instagram}
-                  onChange={(e) => setFormData({ ...formData, instagram: formatInstagram(e.target.value) })}
-                />
+                <Input id="instagram" placeholder="@seuinstagram" value={formData.instagram} onChange={(e) => setFormData({ ...formData, instagram: formatInstagram(e.target.value) })} />
               </div>
 
-              <Button 
-                onClick={handleNext}
-                className="w-full bg-primary hover:bg-primary/90 py-6 text-lg"
-                size="lg"
-              >
+              <Button onClick={handleNext} className="w-full bg-primary hover:bg-primary/90 py-6 text-lg" size="lg">
                 Próximo
                 <ChevronRight className="ml-2 h-5 w-5" />
               </Button>
@@ -218,25 +226,16 @@ const LeadForm = () => {
           {step === 2 && (
             <div className="space-y-6 animate-fade-in-up">
               <h3 className="text-2xl font-bold mb-6">Sobre Você</h3>
-              
+
               <div className="space-y-2">
                 <Label htmlFor="fullName">Nome Completo *</Label>
-                <Input
-                  id="fullName"
-                  placeholder="Seu nome completo"
-                  value={formData.fullName}
-                  onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-                  className={errors.fullName ? "border-destructive" : ""}
-                />
+                <Input id="fullName" placeholder="Seu nome completo" value={formData.fullName} onChange={(e) => setFormData({ ...formData, fullName: e.target.value })} className={errors.fullName ? "border-destructive" : ""} />
                 {errors.fullName && <p className="text-sm text-destructive">{errors.fullName}</p>}
               </div>
 
               <div className="space-y-2">
                 <Label htmlFor="position">Cargo *</Label>
-                <Select 
-                  value={formData.position}
-                  onValueChange={(value) => setFormData({ ...formData, position: value })}
-                >
+                <Select value={formData.position} onValueChange={(value) => setFormData({ ...formData, position: value })}>
                   <SelectTrigger className={errors.position ? "border-destructive" : ""}>
                     <SelectValue placeholder="Selecione seu cargo" />
                   </SelectTrigger>
@@ -255,31 +254,16 @@ const LeadForm = () => {
 
               <div className="space-y-2">
                 <Label htmlFor="company">Nome da Empresa/Especialista *</Label>
-                <Input
-                  id="company"
-                  placeholder="Nome da sua empresa ou seu nome"
-                  value={formData.company}
-                  onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                  className={errors.company ? "border-destructive" : ""}
-                />
+                <Input id="company" placeholder="Nome da sua empresa ou seu nome" value={formData.company} onChange={(e) => setFormData({ ...formData, company: e.target.value })} className={errors.company ? "border-destructive" : ""} />
                 {errors.company && <p className="text-sm text-destructive">{errors.company}</p>}
               </div>
 
               <div className="flex gap-4">
-                <Button 
-                  onClick={handleBack}
-                  variant="outline"
-                  className="flex-1 py-6"
-                  size="lg"
-                >
+                <Button onClick={handleBack} variant="outline" className="flex-1 py-6" size="lg">
                   <ChevronLeft className="mr-2 h-5 w-5" />
                   Voltar
                 </Button>
-                <Button 
-                  onClick={handleNext}
-                  className="flex-1 bg-primary hover:bg-primary/90 py-6"
-                  size="lg"
-                >
+                <Button onClick={handleNext} className="flex-1 bg-primary hover:bg-primary/90 py-6" size="lg">
                   Próximo
                   <ChevronRight className="ml-2 h-5 w-5" />
                 </Button>
@@ -291,13 +275,10 @@ const LeadForm = () => {
           {step === 3 && (
             <div className="space-y-6 animate-fade-in-up">
               <h3 className="text-2xl font-bold mb-6">Contexto do Negócio</h3>
-              
+
               <div className="space-y-2">
                 <Label htmlFor="revenue">Faturamento Anual *</Label>
-                <Select 
-                  value={formData.revenue}
-                  onValueChange={(value) => setFormData({ ...formData, revenue: value })}
-                >
+                <Select value={formData.revenue} onValueChange={(value) => setFormData({ ...formData, revenue: value })}>
                   <SelectTrigger className={errors.revenue ? "border-destructive" : ""}>
                     <SelectValue placeholder="Selecione o faturamento" />
                   </SelectTrigger>
@@ -314,23 +295,13 @@ const LeadForm = () => {
 
               <div className="space-y-2">
                 <Label htmlFor="students">Número de Alunos Atuais *</Label>
-                <Input
-                  id="students"
-                  type="number"
-                  placeholder="Ex: 500"
-                  value={formData.students}
-                  onChange={(e) => setFormData({ ...formData, students: e.target.value })}
-                  className={errors.students ? "border-destructive" : ""}
-                />
+                <Input id="students" type="number" placeholder="Ex: 500" value={formData.students} onChange={(e) => setFormData({ ...formData, students: e.target.value })} className={errors.students ? "border-destructive" : ""} />
                 {errors.students && <p className="text-sm text-destructive">{errors.students}</p>}
               </div>
 
               <div className="space-y-2">
                 <Label htmlFor="investment">Investimento Mensal Disponível *</Label>
-                <Select 
-                  value={formData.investment}
-                  onValueChange={(value) => setFormData({ ...formData, investment: value })}
-                >
+                <Select value={formData.investment} onValueChange={(value) => setFormData({ ...formData, investment: value })}>
                   <SelectTrigger className={errors.investment ? "border-destructive" : ""}>
                     <SelectValue placeholder="Selecione o investimento" />
                   </SelectTrigger>
@@ -346,21 +317,11 @@ const LeadForm = () => {
               </div>
 
               <div className="flex gap-4">
-                <Button 
-                  onClick={handleBack}
-                  variant="outline"
-                  className="flex-1 py-6"
-                  size="lg"
-                >
+                <Button onClick={handleBack} variant="outline" className="flex-1 py-6" size="lg">
                   <ChevronLeft className="mr-2 h-5 w-5" />
                   Voltar
                 </Button>
-                <Button 
-                  onClick={handleSubmit}
-                  className="flex-1 bg-primary hover:bg-primary/90 py-6 text-lg"
-                  size="lg"
-                  disabled={loading}
-                >
+                <Button onClick={handleSubmit} className="flex-1 bg-primary hover:bg-primary/90 py-6 text-lg" size="lg" disabled={loading}>
                   {loading ? "Enviando..." : "Agendar Apresentação"}
                   {!loading && <ChevronRight className="ml-2 h-5 w-5" />}
                 </Button>
