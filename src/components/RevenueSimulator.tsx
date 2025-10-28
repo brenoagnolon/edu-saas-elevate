@@ -27,7 +27,7 @@ const RevenueSimulator = () => {
                 Calcule o potencial do seu E-Saas
               </h2>
               <p className="text-muted-foreground text-lg">
-                Veja quanto você pode gerar com sua plataforma educacional
+                E-Saas = Saas Educacional
               </p>
             </div>
 
@@ -42,13 +42,13 @@ const RevenueSimulator = () => {
                   value={[students]}
                   onValueChange={(value) => setStudents(value[0])}
                   min={50}
-                  max={10000}
+                  max={1000000}
                   step={50}
                   className="cursor-pointer"
                 />
                 <div className="flex justify-between text-sm text-muted-foreground">
                   <span>50</span>
-                  <span>10.000</span>
+                  <span>1.000.000</span>
                 </div>
               </div>
 
@@ -61,13 +61,13 @@ const RevenueSimulator = () => {
                 <Slider
                   value={[monthlyFee]}
                   onValueChange={(value) => setMonthlyFee(value[0])}
-                  min={47}
+                  min={17}
                   max={997}
                   step={10}
                   className="cursor-pointer"
                 />
                 <div className="flex justify-between text-sm text-muted-foreground">
-                  <span>R$ 47</span>
+                  <span>R$ 17</span>
                   <span>R$ 997</span>
                 </div>
               </div>
