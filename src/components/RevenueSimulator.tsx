@@ -42,13 +42,13 @@ const RevenueSimulator = () => {
                   value={[students]}
                   onValueChange={(value) => setStudents(value[0])}
                   min={50}
-                  max={1000000}
+                  max={50000}
                   step={50}
                   className="cursor-pointer"
                 />
                 <div className="flex justify-between text-sm text-muted-foreground">
                   <span>50</span>
-                  <span>1.000.000</span>
+                  <span>50.000</span>
                 </div>
               </div>
 
