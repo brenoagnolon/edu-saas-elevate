@@ -57,10 +57,10 @@ const MarketData = () => {
         {/* Header */}
         <div className="text-center mb-16 animate-fade-in">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-            Não precisa acreditar no que estamos falando para você, confira esses dados:
+            Você não precisa confiar apenas em nós. Os números do setor falam por si:
           </h2>
           <p className="text-lg text-[#DAD5D0]">
-            O mercado global de E-Saas educacional está explodindo
+            O mercado global de Saas educacional está em uma crescente constante...
           </p>
         </div>
 
