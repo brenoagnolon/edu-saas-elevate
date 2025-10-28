@@ -14,7 +14,7 @@ const Credibility = () => {
         
         <div className="space-y-4">
           <h2 className="text-3xl md:text-4xl font-bold">
-            A única empresa que une extração metodológica + desenvolvimento de E-Saas educacional
+           Somos a única empresa especialista em extração metodológica que transforma esse conhecimento em E-Saas útil e escalável.
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
            Com raízes na programação desde 2018 e 4 anos especializados em traduzir o conhecimento de grandes mentes em cursos, mentorias e apostilas, evoluímos para Software. Hoje, construímos E-Saas: o formato que multiplica seu valuation e gera receita recorrente previsível.
@@ -28,11 +28,11 @@ const Credibility = () => {
           </div>
           <div className="space-y-2">
             <p className="text-4xl font-bold text-primary">100%</p>
-            <p className="text-sm text-muted-foreground">Foco em Educação</p>
+            <p className="text-sm text-muted-foreground">Foco em Educação e Tecnologia</p>
           </div>
           <div className="space-y-2">
             <p className="text-4xl font-bold text-primary">IA</p>
-            <p className="text-sm text-muted-foreground">Integrada</p>
+            <p className="text-sm text-muted-foreground">Voltada a Educação</p>
           </div>
         </div>
       </div>
