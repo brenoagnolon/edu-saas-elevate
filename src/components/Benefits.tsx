@@ -1,39 +1,45 @@
 import { Card } from "@/components/ui/card";
-import { FileText, Brain, Settings, Star } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { FileText, Brain, Settings, Star, ArrowDown } from "lucide-react";
 
 const benefits = [
   {
     icon: FileText,
-    title: "Estruturação da Metodologia",
-    description: "Extraímos e organizamos todo seu conhecimento em uma estrutura pedagógica e linha de raciocínio"
+    title: "Metodologia Estruturada",
+    description: "Extraímos e organizamos todo seu conhecimento em uma estrutura pedagógica completa"
   },
   {
     icon: Brain,
-    title: "IA Especialista Integrada",
-    description: "Com base na sua metodologia, treinamos sua IA para dúvidas e suporte aos alunos 24/7 e outras funçoes"
+    title: "IA Personalizada",
+    description: "Assistente inteligente treinado com sua metodologia para suporte aos alunos 24/7"
   },
   {
     icon: Settings,
     title: "Ferramentas Interativas",
-    description: "Desenvovemos recursos tecnológicos que potencializam o aprendizado, engajamento e prática dos alunos"
+    description: "Recursos tecnológicos que potencializam o aprendizado e engajamento"
   },
   {
     icon: Star,
-    title: "App completo e independente",
-    description: "Traduzimos sua metodologia, ferramentas e IA em um app com design moderno e experiência de uso excepcional pronto para ser ofertado"
+    title: "Experiência Premium",
+    description: "Plataforma completa com design moderno e experiência de uso excepcional"
   }
 ];
 
 const Benefits = () => {
+  const scrollToForm = () => {
+    const formElement = document.getElementById('lead-form');
+    formElement?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  };
+
   return (
     <section className="py-20 px-4">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16 space-y-4">
           <h2 className="text-4xl md:text-5xl font-bold">
-            Passo a Passo da construção do seu E-Saas
+            Benefícios do E-Saas
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Da extração da sua metodologia ao aplicativo exclusivo e rentável
+            Transforme sua expertise em uma solução tecnológica completa
           </p>
         </div>
 
@@ -41,7 +47,7 @@ const Benefits = () => {
           {benefits.map((benefit, index) => (
             <Card 
               key={index}
-              className="p-8 bg-card border-border/50 hover:border-primary/50 transition-all duration-300 hover:shadow-2xl hover:shadow-primary/20 hover:scale-105 group"
+              className="p-8 bg-card border-border/50 md:hover:border-primary/50 md:transition-all md:duration-300 md:hover:shadow-2xl md:hover:shadow-primary/20 md:hover:scale-105 group"
             >
               <div className="space-y-4">
                 <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
@@ -54,6 +60,17 @@ const Benefits = () => {
               </div>
             </Card>
           ))}
+        </div>
+
+        <div className="mt-12 text-center">
+          <Button 
+            size="lg"
+            onClick={scrollToForm}
+            className="bg-primary hover:bg-primary/90 text-lg px-8 py-6 rounded-xl shadow-2xl shadow-primary/30 transition-all hover:scale-105"
+          >
+            Falar com Especialista
+            <ArrowDown className="ml-2 h-5 w-5" />
+          </Button>
         </div>
       </div>
     </section>
