@@ -1,5 +1,6 @@
 import { Card } from "@/components/ui/card";
-import { DollarSign, Settings, Star, Award, Target, Check } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { DollarSign, Settings, Star, Award, Target, Check, ArrowDown } from "lucide-react";
 
 const cards = [
   {
@@ -18,10 +19,10 @@ const cards = [
     title: "Operacional",
     benefits: [
       "Escalabilidade infinita",
-      "Entrega sem depender do especialista",
+      "Automação completa",
       "Dados em tempo real",
       "Atualizações centralizadas",
-      "Suporte incontestável com IA"
+      "Suporte escalável com IA"
     ]
   },
   {
@@ -29,10 +30,10 @@ const cards = [
     title: "Experiência do Aluno",
     benefits: [
       "Acesso contínuo ao conteúdo",
-      "Ferramentas práticas",
+      "Sempre atualizado",
       "IA personalizada",
       "Gamificação integrada",
-      "Acesso simplificado"
+      "Comunidade ativa"
     ]
   },
   {
@@ -42,7 +43,7 @@ const cards = [
       "Autoridade premium no mercado",
       "Diferenciação competitiva",
       "Independência de plataformas",
-      "Branding fortalecido",
+      "Brand fortalecido",
       "Barreira de entrada alta"
     ]
   },
@@ -50,7 +51,7 @@ const cards = [
     icon: Target,
     title: "Estratégico",
     benefits: [
-      "Redução de churn",
+      "Redução de refund/churn",
       "Retenção maior de alunos",
       "Upsell facilitado",
       "Dados 100% proprietários",
@@ -60,6 +61,11 @@ const cards = [
 ];
 
 const WhyESaas = () => {
+  const scrollToForm = () => {
+    const formElement = document.getElementById('lead-form');
+    formElement?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  };
+
   return (
     <section className="py-20 px-4">
       <div className="max-w-6xl mx-auto">
@@ -76,8 +82,7 @@ const WhyESaas = () => {
           {cards.map((card, index) => (
             <Card 
               key={index}
-              className="p-8 bg-primary/5 border-border/50 hover:border-primary transition-all duration-300 hover:shadow-xl hover:shadow-primary/10 group"
-              style={{ gridColumn: index >= 3 ? 'span 1' : 'span 1' }}
+              className="p-8 bg-primary/5 border-border/50 md:hover:border-primary md:transition-all md:duration-300 md:hover:shadow-xl md:hover:shadow-primary/10 group"
             >
               <div className="space-y-6">
                 <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
@@ -101,6 +106,17 @@ const WhyESaas = () => {
               </div>
             </Card>
           ))}
+        </div>
+
+        <div className="mt-12 text-center">
+          <Button 
+            size="lg"
+            onClick={scrollToForm}
+            className="bg-primary hover:bg-primary/90 text-lg px-8 py-6 rounded-xl shadow-2xl shadow-primary/30 transition-all hover:scale-105"
+          >
+            Falar com Especialista
+            <ArrowDown className="ml-2 h-5 w-5" />
+          </Button>
         </div>
       </div>
     </section>
