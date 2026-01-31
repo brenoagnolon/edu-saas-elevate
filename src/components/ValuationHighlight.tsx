@@ -18,7 +18,7 @@ const ValuationHighlight = () => {
           {/* Highlighted Quote */}
           <div className="my-8">
             <p className="text-3xl md:text-4xl font-bold text-[#FFD700] text-center leading-tight">
-              "Valuation 3-10x maior"
+              "Possibilidade de Valuation 3-10x maior"
             </p>
           </div>
 
@@ -29,12 +29,12 @@ const ValuationHighlight = () => {
             </p>
 
             <p className="text-lg md:text-xl font-bold text-[#FFD700] leading-relaxed">
-              Com o E-Saas você constrói valuation a partir do mesmo conhecimento que você vende hoje.
+              Com o E-Saas você pode construir valuation a partir do mesmo conhecimento que você vende hoje.
             </p>
 
             <p className="text-base md:text-lg text-[#DAD5D0] leading-relaxed max-w-[800px] mx-auto">
               Detalhe: sem depender tanto da sua energia na entrega, ficando independente de você assim como a construção do seu Software, que será feita por nós. 
-              Mas para tudo isso ser possível, precisamos de você e do seu conhecimento e extrair esse conhecimento para estruturá-lo é a nossa especialidade há 4 anos.
+              Mas para tudo isso ser possível, precisamos de você e do seu conhecimento. Extrair seu conhecimento para transformá-lo em metodologia é a nossa especialidade há 4 anos.
             </p>
           </div>
         </div>
