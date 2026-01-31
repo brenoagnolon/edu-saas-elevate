@@ -55,7 +55,7 @@ const RevenueSimulator = () => {
               {/* Monthly Fee Slider */}
               <div className="space-y-4">
                 <div className="flex justify-between items-center">
-                  <label className="text-lg font-medium">Mensalidade do E-Saas</label>
+                  <label className="text-lg font-medium">Assinatura/Parcela do E-Saas</label>
                   <span className="text-2xl font-bold text-primary">{formatCurrency(monthlyFee)}</span>
                 </div>
                 <Slider
