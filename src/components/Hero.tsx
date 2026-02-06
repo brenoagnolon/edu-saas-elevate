@@ -29,8 +29,8 @@ const Hero = () => {
 
         <h1 className="text-5xl md:text-7xl font-bold leading-tight tracking-tight">
           Transforme seu curso e mentoria em um{" "}
-          <span className="text-gradient">Software Educacional ou de 
-          Serviço</span>
+          <span className="text-gradient">Software Educacional 
+          </span>
         </h1>
         
         <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
