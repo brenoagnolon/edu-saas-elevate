@@ -34,7 +34,7 @@ const Hero = () => {
         </h1>
         
         <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-          Se diferencie no Mercado, Proporcione Experiência ao seu Aluno e Contrua Valuation Real — com recompra, previsibilidade, escalabilidade infinita; e sem depender da sua energia.
+          Se diferencie no Mercado, Proporcione Experiência ao seu Aluno e Contrua Valuation Real — com recompra, previsibilidade e escalabilidade infinita sem depender da sua energia.
         </p>
 
         <div className="pt-8">
